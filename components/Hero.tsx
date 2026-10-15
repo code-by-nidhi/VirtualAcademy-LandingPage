@@ -36,7 +36,7 @@ export default function Hero() {
 
       <div className="container hero-inner">
         <span className="sticker">
-          <span className="pulse" aria-hidden="true" /> Limited Seats · Live Online Classes
+          <span className="pulse" aria-hidden="true" /> TechSprint · Limited Seats · Live Online Classes
         </span>
 
         <h1 className="hero-title">

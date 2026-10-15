@@ -86,7 +86,10 @@ export const COURSES: Course[] = [
     tools: ["HTML", "CSS", "JavaScript", "VS Code", "Chrome DevTools", "Git & GitHub"],
     projects: "Profile page, calculator / to-do app & a live portfolio website",
     format: "Mini project every week + final website",
-    batches: [{ slot: "Morning", time: "9–10 AM" }], // evening batch timing not fixed yet
+    batches: [
+      { slot: "Morning", time: "9–10 AM" },
+      { slot: "Evening", time: "5–6 PM" },
+    ],
     audience: "Students, freelancers, business owners",
     careers: ["Web Designer", "Front-End Developer", "Freelancer"],
   },
