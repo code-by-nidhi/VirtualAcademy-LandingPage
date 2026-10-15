@@ -8,6 +8,7 @@ import { useEffect } from "react";
   - [data-stagger] : children animate in one after another
   - .spot          : radial spotlight follows the cursor
   - [data-tilt]    : subtle 3D tilt towards the cursor (mouse only)
+  - .pin-note      : fixed note sways slightly with the cursor position (mouse only)
   Content is fully visible in the server HTML; hiding only applies under html.js (see layout.tsx).
 */
 export default function Motion() {
@@ -59,7 +60,8 @@ export default function Motion() {
         : undefined;
     if (wrap) ro?.observe(wrap);
 
-    // ---- Spotlight + tilt (pointer) ----
+    // ---- Spotlight + tilt + pinned note sway (pointer) ----
+    const note = document.querySelector<HTMLElement>(".pin-note");
     let tilted: HTMLElement | null = null;
     const resetTilt = () => {
       if (tilted) tilted.style.transform = "";
@@ -74,6 +76,10 @@ export default function Motion() {
         spot.style.setProperty("--my", `${e.clientY - r.top}px`);
       }
       if (reduce || e.pointerType !== "mouse") return;
+      if (note) {
+        note.style.setProperty("--nx", ((e.clientX / window.innerWidth) * 2 - 1).toFixed(3));
+        note.style.setProperty("--ny", ((e.clientY / window.innerHeight) * 2 - 1).toFixed(3));
+      }
       const tilt = t?.closest<HTMLElement>("[data-tilt]") ?? null;
       if (tilt !== tilted) resetTilt();
       if (tilt) {

@@ -9,9 +9,9 @@ export const SITE = {
   title: "Techcadd Virtual Academy – Live Online Courses at ₹1999",
   description:
     "Learn Python, Web Designing, Cyber Security, UI/UX or Digital Marketing live from industry mentors for just ₹1999 per course. Hands-on projects and certificate included.",
-  phone: "", // e.g. "+91 98765 43210" (shown + used for tel: links)
-  whatsapp: "", // digits only with country code, e.g. "919876543210"
-  email: "", // e.g. "info@virtualacademy.in"
+  phone: "+91 98881 22447", // shown + used for tel: links
+  whatsapp: "919888122447", // digits only with country code
+  email: "janvitechcadd@gmail.com",
   price: 1999,
 };
 
@@ -31,6 +31,7 @@ export type Course = {
   tools: string[];
   projects: string;
   format: string | null; // how classes run, e.g. "Mon–Sat · 2 hrs/day"
+  batches: { slot: string; time: string }[]; // live batch timings, shown as pills on the card front
   audience: string;
   careers: string[];
 };
@@ -57,6 +58,10 @@ export const COURSES: Course[] = [
     tools: ["Python", "VS Code"],
     projects: "Real-life mini projects",
     format: null,
+    batches: [
+      { slot: "Noon", time: "12–1 PM" },
+      { slot: "Evening", time: "6–7 PM" },
+    ],
     audience: "Students, freshers, career switchers",
     careers: ["Python Developer", "Data Analyst", "Automation Engineer"],
   },
@@ -81,6 +86,7 @@ export const COURSES: Course[] = [
     tools: ["HTML", "CSS", "JavaScript", "VS Code", "Chrome DevTools", "Git & GitHub"],
     projects: "Profile page, calculator / to-do app & a live portfolio website",
     format: "Mini project every week + final website",
+    batches: [{ slot: "Morning", time: "9–10 AM" }], // evening batch timing not fixed yet
     audience: "Students, freelancers, business owners",
     careers: ["Web Designer", "Front-End Developer", "Freelancer"],
   },
@@ -104,6 +110,10 @@ export const COURSES: Course[] = [
     tools: ["Wireshark", "OWASP Juice Shop", "Burp Suite", "Browser DevTools", "Packet Tracer"],
     projects: "3 mini projects",
     format: "3 live sessions/week + guided labs",
+    batches: [
+      { slot: "Morning", time: "9–10 AM" },
+      { slot: "Evening", time: "4–5 PM" },
+    ],
     audience: "IT students, networking learners, tech enthusiasts",
     careers: ["Security Analyst", "Entry-Level Ethical Hacker", "SOC Trainee"],
   },
@@ -129,6 +139,7 @@ export const COURSES: Course[] = [
     tools: ["Figma", "Auto Layout", "Prototyping", "Smart Animate"],
     projects: "One complete app / web design + a UX case study",
     format: "8 modules · practical + live projects",
+    batches: [{ slot: "Evening", time: "4–5 PM" }],
     audience: "Creative students, designers, freelancers",
     careers: ["UI Designer", "UX Designer", "Product Designer"],
   },
@@ -162,6 +173,7 @@ export const COURSES: Course[] = [
     ],
     projects: "A real-world marketing project for your portfolio",
     format: "20 live sessions · certificate after final project",
+    batches: [{ slot: "Morning", time: "9–10 AM" }],
     audience: "Students, business owners, freelancers, working professionals",
     careers: ["Digital Marketer", "Ads Executive", "Freelancer"],
   },

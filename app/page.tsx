@@ -407,6 +407,21 @@ export default function Home() {
         </div>
       </footer>
 
+      {/* Pinned "after payment" note (desktop) — sways towards the cursor, see Motion.tsx */}
+      {SITE.phone && (
+        <aside className="pin-note" aria-label="After payment">
+          <div className="pin-note-card">
+            <span className="pin-note-pin" aria-hidden="true" />
+            <p className="pin-note-tag">Note</p>
+            <h4>After Payment</h4>
+            <p>
+              Once you&apos;ve paid for the course, you&apos;ll be added to our community within 1 day. For any
+              inconvenience, call <a href={tel}>{SITE.phone}</a>.
+            </p>
+          </div>
+        </aside>
+      )}
+
       {/* Mobile sticky CTA */}
       <a href="#enroll" className="sticky-cta" data-open-enroll>
         Book My Seat for ₹1999 →

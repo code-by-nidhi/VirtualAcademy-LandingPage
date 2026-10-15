@@ -423,6 +423,12 @@ html:has(.modal[open]) { overflow: hidden; }
 .tagline { color: var(--muted); font-size: 1.08rem; }
 .meta { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .meta li { font-size: 0.8rem; padding: 0.3em 0.8em; border-radius: 999px; border: 1px solid var(--border-strong); color: #d9d3f0; }
+.batches { margin-top: 18px; }
+.batches small { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+.batches ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.batch-pill { display: inline-flex; align-items: stretch; padding: 3px; border-radius: 999px; font-size: 0.82rem; background: #e9e6f2; color: #14112a; }
+.batch-pill .slot { display: inline-flex; align-items: center; padding: 0.3em 0.85em; border-radius: 999px; background: #14112a; color: #f5f3fc; font-weight: 500; }
+.batch-pill .time { display: inline-flex; align-items: center; padding: 0.3em 0.9em 0.3em 0.75em; font-weight: 700; white-space: nowrap; }
 .card-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border); }
 .price { font-size: 1.6rem; font-weight: 800; }
 .price s { font-size: 1rem; font-weight: 500; color: var(--muted); margin-right: 8px; }
@@ -506,11 +512,12 @@ html:has(.modal[open]) { overflow: hidden; }
 
 /* ================= Steps ================= */
 .steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; position: relative; }
-.steps::before, .steps::after { content: ""; position: absolute; top: 36px; left: 16.66%; right: 16.66%; height: 2px; border-radius: 2px; }
+.steps::before, .steps::after { content: ""; position: absolute; z-index: 0; top: 36px; left: 16.66%; right: 16.66%; height: 2px; border-radius: 2px; }
 .steps::before { background: var(--border-strong); }
 .steps::after { background: var(--grad); transform-origin: 0 50%; transform: scaleX(0); transition: transform 1.6s var(--ease) 0.3s; }
 .steps.in::after { transform: scaleX(1); }
-.steps li { position: relative; text-align: center; padding: 0 12px; }
+/* z-index on the li (not just .step-num): the reveal animation gives each li its own stacking context */
+.steps li { position: relative; z-index: 1; text-align: center; padding: 0 12px; }
 .step-num {
   position: relative; z-index: 1; display: inline-grid; place-items: center; width: 72px; height: 72px; border-radius: 50%;
   font-size: 1.6rem; font-weight: 800; margin-bottom: 22px;
@@ -704,6 +711,27 @@ html:has(.modal[open]) { overflow: hidden; }
 .footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--faint); font-size: 0.88rem; }
 .footer-bottom p { margin: 0; }
 
+/* ================= Pinned note ================= */
+.pin-note { --nx: 0; --ny: 0; position: fixed; left: 24px; bottom: 24px; z-index: 40; width: 230px; pointer-events: none; }
+.pin-note-card {
+  position: relative; padding: 26px 20px 18px; border-radius: 18px; pointer-events: auto;
+  background: #fff1e6; color: #2a2238; border: 6px solid #fff;
+  box-shadow: 0 22px 40px -14px rgba(0, 0, 0, 0.75);
+  transform-origin: 50% 8px;
+  transform: translate(calc(var(--nx) * 6px), calc(var(--ny) * 4px)) rotate(calc(-5deg + var(--nx) * 4deg));
+  transition: transform 0.6s var(--ease);
+}
+.pin-note-pin {
+  position: absolute; top: -14px; left: 50%; translate: -50% 0; width: 22px; height: 22px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffb199, #ff5a36 55%, #c4321a);
+  box-shadow: 0 6px 8px -2px rgba(0, 0, 0, 0.45);
+}
+.pin-note-tag { margin: 0 0 4px; font-style: italic; font-weight: 600; color: #f26b2a; }
+.pin-note h4 { margin: 0 0 8px; font-size: 1.1rem; font-weight: 700; color: #1a1426; }
+.pin-note p:last-child { margin: 0; font-size: 0.88rem; line-height: 1.5; }
+.pin-note a { color: #f2541b; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.pin-note a:hover { text-decoration: underline; }
+
 /* ================= Sticky mobile CTA ================= */
 .sticky-cta { display: none; }
 
@@ -721,6 +749,7 @@ html:has(.modal[open]) { overflow: hidden; }
   .faq-intro { position: static; }
   .faq-intro .section-head { text-align: center; }
   .faq-intro { text-align: center; }
+  .pin-note { display: none; }
 }
 @media (max-width: 720px) {
   .bento { grid-template-columns: 1fr; }

@@ -104,6 +104,19 @@ function CourseCard({ course: c, index, onFlip }: { course: Course; index: numbe
               <li key={m}>{m}</li>
             ))}
           </ul>
+          <div className="batches">
+            <small>
+              {c.batches.length} {c.batches.length === 1 ? "batch" : "batches"} available
+            </small>
+            <ul>
+              {c.batches.map((b) => (
+                <li key={b.time} className="batch-pill">
+                  <span className="slot">{b.slot}</span>
+                  <span className="time">{b.time}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
           <div className="card-careers">
             <small>Career paths</small>
             <p>{c.careers.join(" · ")}</p>
