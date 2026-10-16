@@ -63,3 +63,29 @@ update in your environment variables.
 
 Spam protection: hidden honeypot field, server-side validation, and the shared secret (so nobody can
 post to your script directly without it).
+
+## WhatsApp alerts (new enrollment → your team's WhatsApp)
+
+After a submission is saved to the sheet, `/api/enroll` sends its details to each number in
+`WHATSAPP_NOTIFY` using the free [CallMeBot](https://www.callmebot.com/blog/free-api-whatsapp-messages/) API.
+If an alert fails, the enrollment still succeeds (it's already in the sheet) and the error is logged.
+
+One-time setup **for each number** that should get alerts:
+
+1. Save **+34 644 71 81 99** in that phone's contacts (name it "CallMeBot").
+2. From that number, send this WhatsApp message to it: `I allow callmebot to send me messages`
+3. You'll get a reply with your **apikey**.
+
+Then add every number (country code, digits only) with its apikey to `.env.local` and your host's settings:
+
+```
+WHATSAPP_NOTIFY=919888122447:1234567,919876543210:7654321
+```
+
+Leave it empty to turn alerts off. Each message includes the student's details and a `wa.me` link
+to start a chat with them.
+
+## WhatsApp chat badge
+
+The green floating badge (bottom-right) opens a WhatsApp chat with `SITE.whatsapp` in
+[`lib/site.ts`](lib/site.ts). Change that number to point it elsewhere.

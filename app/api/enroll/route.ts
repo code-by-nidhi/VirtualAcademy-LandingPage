@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { validateEnrollment } from "@/lib/enroll";
+import { notifyWhatsApp } from "@/lib/whatsapp-notify";
 
 // Receives the enrollment form and appends it to Google Sheets via the Apps Script web app
 // (google-apps-script/Code.gs). The script URL + secret stay on the server.
@@ -39,6 +40,9 @@ export async function POST(req: Request) {
     console.error("[enroll] Google Sheet write failed:", err);
     return NextResponse.json({ ok: false, error: "sheet_failed" }, { status: 502 });
   }
+
+  // Awaited so serverless hosts don't cut it off; it swallows its own errors.
+  await notifyWhatsApp(result.data);
 
   return NextResponse.json({ ok: true });
 }

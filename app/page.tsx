@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Motion from "@/components/Motion";
 import ToolsMarquee from "@/components/ToolsMarquee";
+import { siWhatsapp } from "simple-icons";
 import { COURSES, FAQS, SITE, whatsappUrl } from "@/lib/site";
 
 const Icon = ({ children }: { children: React.ReactNode }) => (
@@ -420,6 +421,16 @@ export default function Home() {
             </p>
           </div>
         </aside>
+      )}
+
+      {/* Floating WhatsApp badge — opens a chat with SITE.whatsapp */}
+      {SITE.whatsapp && (
+        <a href={questionUrl} target="_blank" rel="noopener" className="wa-badge" aria-label="Chat with us on WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d={siWhatsapp.path} />
+          </svg>
+          <span className="wa-badge-label">Chat with us</span>
+        </a>
       )}
 
       {/* Mobile sticky CTA */}
